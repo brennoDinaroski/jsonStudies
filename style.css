@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em; 
+}
+
+.body {
+    background: gray;
+}
+
+.header {
+    display: flex;
+    font-size: 2em;
+    height: 3em;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    color: white;
+}
+
+.search-container {
+    justify-content: center;
+    background: gray;
+    display: grid;    
+    grid-template-columns: 80% 15%;        
+    grid-gap: 1%;
+    margin: 2em 1em;
+    font-size: 1.25em;     
+}
+
+.search-container input {
+    padding: 0.25em;
+    border: none;
+    border-radius: 10em;
+}
+
+.search-container button {
+    border: none; 
+    border-radius: 10em;
+}
+
+.content {
+    justify-content: center;
+    background: gray;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));        
+    grid-gap: 1%;
+    margin: 0 1em;
+}
+
+.card {
+    display: FLEX;
+    flex-direction: column;
+    gap: 0.1em;
+    background-color: #fff;
+    padding: 1em; 
+    max-width: fit-content;   
+    max-height: 30em;
+    border: none;
+    border-radius: 10%;
+    
+}
+
+.product__image {
+    max-width: 100%;
+    max-height: 65%;
+    margin: auto;
+}
+
+.product__photo {
+    display: block;
+    max-width: 20em;
+    max-height: 15em;
+}
+
+.product__id {
+    display: none;
+}
+
+.product__title{
+    font-size: 1.5em;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(33,33,33);
+    max-width: 100%;    
+    display: block;
+}
+
+.product__price {
+    font-size: 1.5em;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    color: rgb(33,33,33);
+    max-height: 10%;
+    color: #2562a7;
+}
+
+.product__brand {
+    font-size: 0.75em;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;    
+    max-height: 10%;
+    color: #2562a7;
+}
+
+.product__description {
+    font-size: 1em;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    color: rgb(33,33,33);        
+    margin-top: auto;
+}
+
