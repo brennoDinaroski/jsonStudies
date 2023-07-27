@@ -6,11 +6,7 @@ const searchInput = document.querySelector("[data-input]")
 let apiProductsArray = []
 
 searchInput.addEventListener("input", (e) => {
-    const searchInformation = e.target.value.toLowerCase()   
-    console.log(apiProductsArray[0].title.toLowerCase().includes(searchInformation) 
-        ? apiProductsArray[0].title 
-        : 'não'
-    )
+    const searchInformation = e.target.value.toLowerCase()  
 
     apiProductsArray.forEach(product => {        
         let isVisible = 
