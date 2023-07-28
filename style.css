@@ -5,6 +5,7 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 1em; 
+    text-decoration: none;
 }
 
 .body {
@@ -86,9 +87,15 @@
     justify-content: center;
     text-align: center;
     font-weight: 700;
-    color: rgb(33,33,33);
+    
     max-width: 100%;    
     display: block;
+    
+}
+
+.product__title__archor{
+    text-decoration: none;
+    color: rgb(50,50,50);
 }
 
 .product__price {

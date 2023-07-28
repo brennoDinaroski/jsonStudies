@@ -1,9 +1,11 @@
-import { exportTest, value02 } from "./test.js";
+import { handleCardClick } from './productPageBuilder.js'
 export let apiProducts01 = 1
 
 const searchInput = document.querySelector("[data-input]")
 
+let dataProductTitle = []
 let apiProductsArray = []
+let productClicked = []
 
 searchInput.addEventListener("input", (e) => {
     const searchInformation = e.target.value.toLowerCase()  
@@ -13,7 +15,6 @@ searchInput.addEventListener("input", (e) => {
             product.title.toLowerCase().includes(searchInformation) 
             || product.brand.toLowerCase().includes(searchInformation)  
             
-        console.log(product)        
         product.element.classList.toggle("hide", !isVisible)
     })
     
@@ -38,16 +39,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dataElement = document.createElement('div')
                 dataElement.classList.add("card")                          
                 dataElement.innerHTML = ` 
-                    <div class='product__id' > ID: ${item.id} </div>
-                    <header class='product__title'> ${item.title} </header>
+                    <div class='product__id' data-product-id="${item.id}"> ID: ${item.id} </div>
+                    <header data-product-title class='product__title'> 
+                        <a class="product__title__anchor" href="#"> ${item.title} </a> 
+                    </header>
                     <div class='product__brand' > ${item.brand} </div>                    
                     <img class='product__image' src = "${item.images[0]}">                    
                     <div class='product__price' > R$ ${item.price} </div>
                     <div class='product__description' > ${item.description} </div>                                                          
                 `;
-                contentDiv.appendChild(dataElement)
+                contentDiv.appendChild(dataElement)                          
+                /* receiveDataElement (dataElement)   */ 
+                
+                dataElement.addEventListener('click', handleCardClick);             
+
+                dataElement.addEventListener("click", (dataElement) => {
+                    alert('product anchor was clicked' + dataElement)                    
+                })                
+
+                dataProductTitle = dataElement.querySelector("[data-product-title]")                
+
                 return {id: item.id, title: item.title, brand: item.brand, image: item.image, price: item.price, description: item.description, element: dataElement}
             });
         })
-        .catch(error => console.log('ERROR Fetching data', error));
+        .catch(error => console.log('ERROR Fetching data', error));       
 })
