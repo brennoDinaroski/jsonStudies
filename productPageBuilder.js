@@ -1,4 +1,11 @@
+
 export function handleCardClick(event) {
-    const clickedCard = event.currentTarget;
-    console.log('clicked Card: ', clickedCard)
+    /* event.preventDefault(); */
+    const clickedCard = event.currentTarget;    
+    const anchorDiv = clickedCard.querySelector('.product__title__anchor')
+    const productContent = document.querySelector("[data-product-content]")
+
+    productContent.innerHTML = 'oi'
+    return ({card: clickedCard, anchor: anchorDiv, product: productContent})        
 }
+

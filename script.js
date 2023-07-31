@@ -41,21 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 dataElement.innerHTML = ` 
                     <div class='product__id' data-product-id="${item.id}"> ID: ${item.id} </div>
                     <header data-product-title class='product__title'> 
-                        <a class="product__title__anchor" href="#"> ${item.title} </a> 
+                        <a class="product__title__anchor" href="./productDetails.html"> ${item.title} </a> 
                     </header>
                     <div class='product__brand' > ${item.brand} </div>                    
                     <img class='product__image' src = "${item.images[0]}">                    
                     <div class='product__price' > R$ ${item.price} </div>
                     <div class='product__description' > ${item.description} </div>                                                          
                 `;
-                contentDiv.appendChild(dataElement)                          
-                /* receiveDataElement (dataElement)   */ 
+                contentDiv.appendChild(dataElement)                
                 
-                dataElement.addEventListener('click', handleCardClick);             
-
-                dataElement.addEventListener("click", (dataElement) => {
-                    alert('product anchor was clicked' + dataElement)                    
-                })                
+                dataElement.addEventListener('click', handleCardClick);                
 
                 dataProductTitle = dataElement.querySelector("[data-product-title]")                
 

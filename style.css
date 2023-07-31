@@ -86,11 +86,9 @@
     font-size: 1.5em;
     justify-content: center;
     text-align: center;
-    font-weight: 700;
-    
+    font-weight: 700;    
     max-width: 100%;    
-    display: block;
-    
+    display: block;    
 }
 
 .product__title__archor{
