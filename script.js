@@ -5,7 +5,7 @@ const searchInput = document.querySelector("[data-input]")
 
 let dataProductTitle = []
 let apiProductsArray = []
-let productClicked = []
+
 
 searchInput.addEventListener("input", (e) => {
     const searchInformation = e.target.value.toLowerCase()  
@@ -48,10 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class='product__price' > R$ ${item.price} </div>
                     <div class='product__description' > ${item.description} </div>                                                          
                 `;
-                contentDiv.appendChild(dataElement)                
+                contentDiv.appendChild(dataElement)                           
                 
-                dataElement.addEventListener('click', handleCardClick);                
-
+                dataElement.addEventListener('click', handleCardClick)
+                
+                
                 dataProductTitle = dataElement.querySelector("[data-product-title]")                
 
                 return {id: item.id, title: item.title, brand: item.brand, image: item.image, price: item.price, description: item.description, element: dataElement}
