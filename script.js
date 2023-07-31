@@ -2,6 +2,7 @@ import { handleCardClick } from './productPageBuilder.js'
 export let apiProducts01 = 1
 
 const searchInput = document.querySelector("[data-input]")
+const productElement = document.querySelectorAll("card")
 
 let dataProductTitle = []
 let apiProductsArray = []
@@ -52,11 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 dataElement.addEventListener('click', handleCardClick)
                 
-                
                 dataProductTitle = dataElement.querySelector("[data-product-title]")                
-
+                
                 return {id: item.id, title: item.title, brand: item.brand, image: item.image, price: item.price, description: item.description, element: dataElement}
             });
         })
         .catch(error => console.log('ERROR Fetching data', error));       
-})
+    })
+    
+    
+    

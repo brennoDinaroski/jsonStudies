@@ -6,9 +6,18 @@ export function handleCardClick(event) {
     return {card: clickedCard}
 }
 
+async function receiveCard(){
+    console.log('before')
+    const card = await handleCardClick()
+    console.log('after', card)
+}
+
+
+
 
 /* function createProductContent(clickedCard) { */
 document.addEventListener('DOMContentLoaded', () => {  
+    receiveCard()
     const productSpace = document.querySelector("[data-product-content]")    
     console.log(productSpace)
     
@@ -19,7 +28,3 @@ document.addEventListener('DOMContentLoaded', () => {
     `
     productSpace.appendChild(productContent)    
 })
-
-/* document.addEventListener('DOMContentLoaded', () => {     
-    dataElement.addEventListener('click', handleCardClick)
-}) */
