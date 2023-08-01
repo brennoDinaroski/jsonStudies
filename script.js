@@ -1,4 +1,4 @@
-import { handleCardClick } from './productPageBuilder.js'
+/* import { handleCardClick } from './productPageBuilder.js' */
 
 const searchInput = document.querySelector("[data-input]")
 
@@ -20,6 +20,10 @@ searchInput.addEventListener("input", (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.content');
 
+    apiConsuming(contentDiv)
+})
+
+function apiConsuming(contentDiv){
     fetch('https://dummyjson.com/products', {})
         .then((response) => {
             if (!response.ok) {
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         })
         .catch(error => console.log('ERROR Fetching data', error));
-})
+    }
 
 function createProductListItem(item, contentDiv) {
     const dataElement = document.createElement('div')
