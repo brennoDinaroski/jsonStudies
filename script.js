@@ -1,30 +1,36 @@
-/* import { handleCardClick } from './productPageBuilder.js' */
-
 const searchInput = document.querySelector("[data-input]")
+const searchButton = document.querySelector("[data-search-button]")
 
 let apiProductsArray = []
 
-searchInput.addEventListener("input", (e) => {
-    const searchInformation = e.target.value.toLowerCase()
+if(searchInput != null){
+searchInput.addEventListener("input", (valueSearched) => {
+    const searchInformation = valueSearched.target.value.toLowerCase()
 
-    apiProductsArray.forEach(product => {
-        let isVisible =
-            product.title.toLowerCase().includes(searchInformation)
-            || product.brand.toLowerCase().includes(searchInformation)
+    searchButton.addEventListener("click", () =>
 
-        product.element.classList.toggle("hide", !isVisible)
-    })
+        apiProductsArray.forEach(product => {
+            let isVisible =
+                product.title.toLowerCase().includes(searchInformation)
+                || product.brand.toLowerCase().includes(searchInformation)
 
-})
+            product.element.classList.toggle("hide", !isVisible)
+        })
+    )
+
+})} else {}
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.content');
 
-    apiConsuming(contentDiv)
+    apiConsuming(contentDiv, createProductListItem)
+
 })
 
-function apiConsuming(contentDiv){
-    fetch('https://dummyjson.com/products', {})
+export async function apiConsuming(contentDiv, functionCreateProduct) {
+    await fetch('https://dummyjson.com/products', {})
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Newtwork response was not ok')
@@ -33,19 +39,20 @@ function apiConsuming(contentDiv){
         })
         .then((jsonData) => {
             apiProductsArray = jsonData.products.map((item) =>
-                createProductListItem(item, contentDiv)
+                functionCreateProduct(item, contentDiv)
             );
         })
         .catch(error => console.log('ERROR Fetching data', error));
-    }
+    return apiProductsArray;
+}
 
 function createProductListItem(item, contentDiv) {
     const dataElement = document.createElement('div')
     const link = document.createElement('a')
-    
+
     link.href = `./productDetails.html?id=${item.id}`
-    link.textContent = item.name
-    
+    link.textContent = item.title
+
     dataElement.appendChild(link)
     dataElement.classList.add("card")
     dataElement.innerHTML = ` 
@@ -58,6 +65,8 @@ function createProductListItem(item, contentDiv) {
             <div class='product__price' > R$ ${item.price} </div>
             <div class='product__description' > ${item.description} </div>                                                          
         `;
+
+
     contentDiv.appendChild(dataElement)
 
     return {
@@ -70,4 +79,19 @@ function createProductListItem(item, contentDiv) {
         element: dataElement
     }
 };
+
+/* searchInput.addEventListener("input", (valueSearched) => {
+    const searchInformation = valueSearched.target.value.toLowerCase()
+
+    apiProductsArray.forEach(product => {
+        let isVisible =
+            product.title.toLowerCase().includes(searchInformation)
+            || product.brand.toLowerCase().includes(searchInformation)
+
+        product.element.classList.toggle("hide", !isVisible)
+    })
+
+}) */
+
+
 

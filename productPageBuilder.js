@@ -1,36 +1,41 @@
+import { apiConsuming } from "./script.js"
 
 document.addEventListener('DOMContentLoaded', () => {
-    const productName = document.querySelector("#productName")
-    const productDescription = document.querySelector("#productDescription")
-
+    const productSpace = document.querySelector("[data-product-content]")   
+    
     const urlParams = new URLSearchParams(window.location.search)
     const productId = urlParams.get('id')
     console.log('productId: ', productId)
 
-    apiConsumingProducts(productSpace)
+    apiConsuming(productSpace, appendProductPage)    
 
-    const productSpace = document.querySelector("[data-product-content]")
-    const productContent = document.createElement('div')
-    productContent.classList.add('product-content')
-    productContent.innerHTML = `
-    <div> Product Content </div> 
-    <p> Product ID: ${productId}</p>     
-    `
-    productSpace.appendChild(productContent)
+    function appendProductPage(item, productSpace) {        
+        if(item.id == productId) {
+            const productContent = document.createElement('div')
+            productContent.classList.add('product-content')
+            productContent.innerHTML = `  
+            <div class='ProductDescription'>              
+                
+                <div class='productPageImageDiv'>
+                    <img class='productPage__image' src = "${item.images[0]}">                    
+                </div>
+
+                <div class='productPage__information'>
+                    <div class='product__id' data-product-id="${item.id}"> ID: ${item.id} </div>
+                    <header data-product-title class='product__title'> 
+                        <a class="productPage__title__anchor" href="./productDetails.html?id=${item.id}"> ${item.title} </a> 
+                    </header>
+                    <div class='productPage__brand' > ${item.brand} </div>                    
+                    <div class='productPage__price' > R$ ${item.price} </div>   
+                    <button class='productPage__buyButton' > BUY </button>                 
+                </div>                
+            </div>
+            <div>
+                <div class='productPage__description' > ${item.description} </div>            
+            </div>
+                `
+            productSpace.appendChild(productContent)
+        } else {return }
+    }
 })
 
-function apiConsumingProducts(contentDiv) {
-    fetch('https://dummyjson.com/products', {})
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Newtwork response was not ok')
-            }
-            return response.json()
-        })
-        .then((jsonData) => {
-            apiProductsArray = jsonData.products.map((item) =>
-                createProductListItem(item, contentDiv) //Create a function to put the itens in the page and clean from the code above in 'inner.html' like de 'script.js' is
-            );
-        })
-        .catch(error => console.log('ERROR Fetching data', error));
-}
