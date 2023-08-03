@@ -63,7 +63,9 @@ function createProductListItem(item, contentDiv) {
             <div class='product__brand' > ${item.brand} </div>                    
             <img class='product__image' src = "${item.images[0]}">                    
             <div class='product__price' > R$ ${item.price} </div>
-            <div class='product__description' > ${item.description} </div>                                                          
+            <div class='product__description' > ${item.description} </div>
+            <button class='button__addToCart' data-button-addToCart >Add To Cart</button>
+
         `;
 
 
