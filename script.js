@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.content');
 
     apiConsuming(contentDiv, createProductListItem)
-
 })
 
 export async function apiConsuming(contentDiv, functionCreateProduct) {
@@ -64,10 +63,8 @@ function createProductListItem(item, contentDiv) {
             <img class='product__image' src = "${item.images[0]}">                    
             <div class='product__price' > R$ ${item.price} </div>
             <div class='product__description' > ${item.description} </div>
-            <button class='button__addToCart' data-button-addToCart >Add To Cart</button>
-
+            <button class='button__addToCart' data-button-addtocart=${item.id} id="${item.id}" >Add To Cart</button>
         `;
-
 
     contentDiv.appendChild(dataElement)
 
@@ -82,18 +79,6 @@ function createProductListItem(item, contentDiv) {
     }
 };
 
-/* searchInput.addEventListener("input", (valueSearched) => {
-    const searchInformation = valueSearched.target.value.toLowerCase()
-
-    apiProductsArray.forEach(product => {
-        let isVisible =
-            product.title.toLowerCase().includes(searchInformation)
-            || product.brand.toLowerCase().includes(searchInformation)
-
-        product.element.classList.toggle("hide", !isVisible)
-    })
-
-}) */
 
 
 
