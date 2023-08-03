@@ -1,14 +1,7 @@
-function addProductToCart(productId) {
-    console.log(productId)
+export function addToCartClickListener (event) {
+    const ItemId = event.currentTarget.getAttribute('data-button-addtocart')
+    console.log(`clicked: ${ItemId}`)
 }
-
-document.querySelectorAll(".button__addToCart").forEach((button) => {
-    console.log('button: ', button)
-    button.addEventListener("click", () => {
-        const productId = button.getAttribute("")
-        addProductToCart(productId)
-    })
-})
 
 
 

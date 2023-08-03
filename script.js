@@ -1,7 +1,10 @@
+import { addToCartClickListener } from "./cartScript.js"
+
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
 
 let apiProductsArray = []
+let addToCartButton = []
 
 if(searchInput != null){
 searchInput.addEventListener("input", (valueSearched) => {
@@ -68,6 +71,10 @@ function createProductListItem(item, contentDiv) {
 
     contentDiv.appendChild(dataElement)
 
+    
+
+
+
     return {
         id: item.id,
         title: item.title,
@@ -78,6 +85,10 @@ function createProductListItem(item, contentDiv) {
         element: dataElement
     }
 };
+
+let i = 0
+    addToCartButton = document.querySelector('.button__addToCart')
+    addToCartButton.addEventListener('click', addToCartClickListener)
 
 
 
