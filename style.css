@@ -23,6 +23,17 @@
     color: white;
 }
 
+.cart {
+    max-width: 2em;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.cart__image{
+    max-width: 3em;
+}
+
 .search-container {
     justify-content: center;
     background: gray;

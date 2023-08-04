@@ -1,10 +1,7 @@
-import { addToCartClickListener } from "./cartScript.js"
-
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
 
 let apiProductsArray = []
-let addToCartButton = []
 
 if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
@@ -81,27 +78,35 @@ function createProductListItem(item, contentDiv) {
 
     dataElement.appendChild(buttonAddToCart)
 
+    addToCartButton(dataElement)
+
+    return {
+        id: item.id,
+        title: item.title,
+        brand: item.brand,
+        image: item.image,
+        price: item.price,
+        description: item.description,
+        element: dataElement
+    }
+}
+
+export function addToCartButton(dataElement) {
     dataElement.addEventListener('click', (event) => {
         const clickedButton = event.target.closest('.button__addToCart');
-        
+
         if (clickedButton) {
             event.preventDefault();
             const id = clickedButton.getAttribute('data-id');
             const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
-            existingIds.push(id);
-            localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
-            console.log('button clicked: ', id);
+
+            if (!existingIds.includes(id)) {
+                existingIds.push(id);
+                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
+                console.log('button clicked: ', id);
+            }
         }
     })
-
-return {
-    id: item.id,
-    title: item.title,
-    brand: item.brand,
-    image: item.image,
-    price: item.price,
-    description: item.description,
-    element: dataElement
 }
-};
 
+console.log(JSON.parse(localStorage.getItem('SelectedIds')) || [])

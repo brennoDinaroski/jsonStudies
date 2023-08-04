@@ -1,4 +1,4 @@
-import { apiConsuming } from "./script.js"
+import { apiConsuming, addToCartButton } from "./script.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     const productSpace = document.querySelector("[data-product-content]")   
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </header>
                     <div class='productPage__brand' > ${item.brand} </div>                    
                     <div class='productPage__price' > R$ ${item.price} </div>   
-                    <button class='productPage__buyButton' > BUY </button>                 
+                    <button class='productPage__buyButton'  > BUY </button>                 
                 </div>                
             </div>
             <div>
@@ -38,4 +38,3 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {return }
     }
 })
-

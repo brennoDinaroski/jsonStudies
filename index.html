@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">  
-    
+    <link rel="stylesheet" href="style.css">
+
     <title> Eletronics Site by API </title>
 
 </head>
+
 <body class="body">
     <header class="header">
-        <h1>PRODUCTS AVAILABLE</h1>                   
-    </header>    
+        <h1>PRODUCTS AVAILABLE</h1>
+
+    </header>
+    <p class="cart">
+        <a href="./cart.html">
+            <img class="cart__image" src="resources\images\shopping-cart.png">
+        </a>
+    </p>
     <div class="search">
         <div class="search-container">
             <input data-input class="search-container__input" type="text" placeholder="Search here...">
-            <button data-search-button class="search-container__button" type="submit"> Search </button>        
-        </div>   
-        <div class="search-results">            
+            <button data-search-button class="search-container__button" type="submit"> Search </button>
         </div>
-    </div>    
-
-    <div class="content">                  
+        <div class="search-results">
+        </div>
     </div>
 
-    <script type="module" defer src="./script.js" ></script>    
-    <script type="module" src="./search.js"></script>  
-    <script type="module" src="./test.js" ></script>   
-    <script type="module" src="./cartScript.js" ></script>
-    
+    <div class="content">
+    </div>
+
+    <script type="module" defer src="./script.js"></script>
+    <script type="module" src="./search.js"></script>
+    <script type="module" src="./test.js"></script>
+    <script type="module" src="./cartScript.js"></script>
+
 </body>
+
 </html>
