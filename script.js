@@ -74,27 +74,30 @@ function createProductListItem(item, contentDiv) {
             <div class='product__description' > ${item.description} </div>            
         `;
 
-        contentDiv.appendChild(dataElement)
-        
+    contentDiv.appendChild(dataElement)
+
     dataElement.appendChild(buttonAddToCart)
     const buttonArray = document.querySelectorAll('.button__addToCart')
+
+    const buttonContainer = document.getElementById('button')
+    
     /* buttonArray.forEach((button) => */
     buttonArray.addEventListener('click', (event) => {
-            event.preventDefault();
-            const clickedButton = event.target
-            const id = clickedButton.getAttribute('data-id')
+        event.preventDefault();
+        const clickedButton = event.target
+        const id = clickedButton.getAttribute('data-id')
 
-            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
+        const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
 
-            existingIds.push(id)        
-            localStorage.setItem('SelectedIds', JSON.stringify(existingIds))
+        existingIds.push(id)
+        localStorage.setItem('SelectedIds', JSON.stringify(existingIds))
 
-            /* window.location.href = "#" */
-            console.log('button clicked: ', id)
-        })
+        /* window.location.href = "#" */
+        console.log('button clicked: ', id)
+    })
     /* ) */
 
-    
+
 
 
     return {
