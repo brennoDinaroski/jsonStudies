@@ -56,6 +56,7 @@ function createProductListItem(item, contentDiv) {
 
     buttonAddToCart.innerHTML = 'Add to Cart'
     buttonAddToCart.setAttribute('class', 'button__addToCart')
+    buttonAddToCart.setAttribute('id', 'buttonContainer')
     buttonAddToCart.setAttribute('data-id', `${item.id}`)
 
     link.href = `./productDetails.html?id=${item.id}`
@@ -66,7 +67,9 @@ function createProductListItem(item, contentDiv) {
     dataElement.innerHTML = ` 
             <div class='product__id' data-product-id="${item.id}"> ID: ${item.id} </div>
             <header data-product-title class='product__title'> 
-                <a class="product__title__anchor" href="./productDetails.html?id=${item.id}"> ${item.title} </a> 
+                <a class="product__title__anchor" href="./productDetails.html?id=${item.id}"> 
+                    ${item.title} 
+                </a> 
             </header>
             <div class='product__brand' > ${item.brand} </div>                    
             <img class='product__image' src = "${item.images[0]}">                    
@@ -79,26 +82,27 @@ function createProductListItem(item, contentDiv) {
     dataElement.appendChild(buttonAddToCart)
     const buttonArray = document.querySelectorAll('.button__addToCart')
 
-    const buttonContainer = document.getElementById('button')
+    const noEventListenersButtons = Array.from(buttonArray)
     
-    /* buttonArray.forEach((button) => */
-    buttonArray.addEventListener('click', (event) => {
-        event.preventDefault();
-        const clickedButton = event.target
-        const id = clickedButton.getAttribute('data-id')
+    noEventListenersButtons.forEach((button) => {
+        button.addEventListener('click', (event) => { 
+            event.preventDefault();
+            const clickedButton = event.target
+            const id = clickedButton.getAttribute('data-id')           
 
-        const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
+            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
+            existingIds.push(id)
+            localStorage.setItem('SelectedIds', JSON.stringify(existingIds))
 
-        existingIds.push(id)
-        localStorage.setItem('SelectedIds', JSON.stringify(existingIds))
+            button.removeEventListener('click', (event) => {
+                event.preventDefault()
+            })
 
-        /* window.location.href = "#" */
-        console.log('button clicked: ', id)
+            /* window.location.href = "#" */
+            console.log('button clicked: ', id)
+        })
+        /* button.addEventListener('click', clickHandler) */
     })
-    /* ) */
-
-
-
 
     return {
         id: item.id,
