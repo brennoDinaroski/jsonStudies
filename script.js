@@ -104,6 +104,8 @@ export function addToCartButton(dataElement) {
                 existingIds.push(id);
                 localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
                 console.log('button clicked: ', id);
+                console.log('localStorage', existingIds)
+                addItensToCart(existingIds)                
             }
         }
     })
