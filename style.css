@@ -32,6 +32,7 @@
 
 .cart__image{
     max-width: 3em;
+    cursor: pointer;
 }
 
 .search-container {
@@ -213,6 +214,17 @@
     text-align: justify;
     justify-content: center;
     margin: 2em 5em;
+}
 
+.search-container__button {
+    cursor: pointer;
+}
+
+.button__addToCart {
+    cursor: pointer;
+}
+
+.closeShopping {
+    cursor: pointer;
 }
 
