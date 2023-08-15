@@ -1,36 +1,33 @@
+export const dataListCart = document.querySelector('[data-list-cart]')
 let cartImage = document.querySelector('.cart__image')
 let closeShoppingCart = document.querySelector('.closeShopping')
 let body = document.querySelector('.card')
 
-cartImage.addEventListener('click', () => {
-    console.log("cartImage clicked")
+cartImage.addEventListener('click', () => {    
     body.classList.add('active')
     body.classList.remove('deactive');
 })
 
-closeShoppingCart.addEventListener('click', () => {
-    console.log("closeShoppingCart clicked");
+closeShoppingCart.addEventListener('click', () => {    
     body.classList.add('deactive')
     body.classList.remove('active');
 })
 
+export function addItensToCart(existingIds, dataListCart) {    
+    dataListCart.innerHTML = ''
 
-
-/* if (typeof Storage !== "undefined") {
-    let myArray = JSON.parse(localStorage.getItem("SelectedIds")) || []
+    const idsNumber = existingIds.map(str => parseInt(str, 10))
     
-    const handleArrayChange = (newArray) => {
-        myArray = newArray
-        console.log("localStorage array: ", myArray)
-    }
-    
-    
-    window.addEventListener("storage", (event) => {
-        if (event.key === "SelectedIds") {
-            const newArray = JSON.parse(event.newValue)
-            handleArrayChange(newArray)
-        }
+    idsNumber.forEach((item) => {
+        const divElement = document.createElement('div')
+        divElement.classList.add("productItemCart")
+        divElement.innerHTML = `
+        <div> ${item} </div>
+        `        
+        dataListCart.appendChild(divElement)
     })
-} else {
-    console.log ("localStorage is not suported in this browser")
-} */
+    return {        
+    }
+}
+
+

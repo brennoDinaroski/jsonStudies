@@ -1,3 +1,5 @@
+import { addItensToCart, dataListCart } from './cartScript.js'
+
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
 
@@ -102,13 +104,15 @@ export function addToCartButton(dataElement) {
 
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
-                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
-                console.log('button clicked: ', id);
-                console.log('localStorage', existingIds)
-                addItensToCart(existingIds)                
+                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));                                
+                addItensToCart(existingIds, dataListCart)
             }
         }
     })
 }
 
-console.log(JSON.parse(localStorage.getItem('SelectedIds')) || [])
+const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
+
+if(eIds  != undefined ){    
+    addItensToCart(eIds, dataListCart) 
+} 
