@@ -96,22 +96,45 @@ function createProductListItem(item, contentDiv) {
 }
 
 export function addToCartButton(dataElement) {
-    dataElement.addEventListener('click', (event) => {
-        const clickedButton = event.target.closest('.button__addToCart');
 
+    productContainer.addEventListener('click', (event) => {
+        const cardElement = event.target.closest('.card')
+        
+        const clickedButton = event.target.closest('.button__addToCart');  
+
+        
         if (clickedButton) {
             event.preventDefault();
+            
             const id = clickedButton.getAttribute('data-id');
             const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
 
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
                 localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
-                addItensToCart(existingIds, dataListCart)
+                
+                let additionalInfoItem = {
+                    id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
+                    brand: cardElement.querySelector('.product__brand').textContent,
+                    title: cardElement.querySelector('.product__title__anchor').textContent,
+                    imageSrc: cardElement.querySelector('.product__image').getAttribute('src'),
+                    price: cardElement.querySelector('.product__price').textContent,
+                    description: cardElement.querySelector('.product__description').textContent
+
+                }
+
+                additionalInfo.push(additionalInfoItem)
+                
+                addItensToCart(existingIds, dataListCart, additionalInfo)
+
             }
         }
     })
 }
+
+let additionalInfo = []
+const productContainer = document.body
+
 
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 

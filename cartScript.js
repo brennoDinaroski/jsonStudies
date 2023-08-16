@@ -21,16 +21,19 @@ export function transferProducts(item){
 
 console.log(productsObjects)
 
-export function addItensToCart(existingIds, dataListCart) {    
-    dataListCart.innerHTML = ''
-
+export function addItensToCart(existingIds, dataListCart, additionalInfo) {    
+    dataListCart.innerHTML = ''    
+    console.log('additionalInfo: ', additionalInfo)
+    
     const idsNumber = existingIds.map(str => parseInt(str, 10))
+    console.log(idsNumber)
     
     idsNumber.forEach((item) => {
         const divElement = document.createElement('div')
         divElement.classList.add("productItemCart")
         divElement.innerHTML = `
         <div> ${item} </div>
+        <div> ${additionalInfo[item]} </div>        
         `        
         dataListCart.appendChild(divElement)
     })
