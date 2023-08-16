@@ -1,4 +1,4 @@
-import { addItensToCart, dataListCart } from './cartScript.js'
+import { addItensToCart, dataListCart, transferProducts } from './cartScript.js'
 
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
@@ -40,8 +40,10 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
             return response.json()
         })
         .then((jsonData) => {
-            apiProductsArray = jsonData.products.map((item) =>
+            apiProductsArray = jsonData.products.map((item) => {
                 functionCreateProduct(item, contentDiv)
+                transferProducts(item)
+            }
             );
         })
         .catch(error => console.log('ERROR Fetching data', error));
@@ -104,7 +106,7 @@ export function addToCartButton(dataElement) {
 
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
-                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));                                
+                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
                 addItensToCart(existingIds, dataListCart)
             }
         }
@@ -113,6 +115,6 @@ export function addToCartButton(dataElement) {
 
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
-if(eIds  != undefined ){    
-    addItensToCart(eIds, dataListCart) 
+if (eIds != undefined) {
+    addItensToCart(eIds, dataListCart)
 } 

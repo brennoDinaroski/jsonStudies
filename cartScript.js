@@ -13,6 +13,14 @@ closeShoppingCart.addEventListener('click', () => {
     body.classList.remove('active');
 })
 
+const productsObjects = []
+
+export function transferProducts(item){
+    productsObjects.push(item)    
+}
+
+console.log(productsObjects)
+
 export function addItensToCart(existingIds, dataListCart) {    
     dataListCart.innerHTML = ''
 
@@ -29,5 +37,4 @@ export function addItensToCart(existingIds, dataListCart) {
     return {        
     }
 }
-
 
