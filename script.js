@@ -5,6 +5,7 @@ const searchButton = document.querySelector("[data-search-button]")
 
 let apiProductsArray = []
 
+
 if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
         const searchInformation = valueSearched.target.value.toLowerCase()
@@ -124,6 +125,7 @@ export function addToCartButton(dataElement) {
                 }
 
                 additionalInfo.push(additionalInfoItem)
+                localStorage.setItem('itemsSelected', JSON.stringify(additionalInfo))
                 
                 addItensToCart(existingIds, dataListCart, additionalInfo)
 
@@ -141,3 +143,4 @@ const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 if (eIds != undefined) {
     addItensToCart(eIds, dataListCart)
 } 
+
