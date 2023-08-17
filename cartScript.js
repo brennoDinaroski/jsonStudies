@@ -21,7 +21,6 @@ export function transferProducts(item){
 
 export function addItensToCart(existingIds, dataListCart, additionalInfo) {    
     dataListCart.innerHTML = ''    
-    console.log('additionalInfo: ', additionalInfo)  
 
     const idsNumber = existingIds.map(str => parseInt(str, 10))    
     

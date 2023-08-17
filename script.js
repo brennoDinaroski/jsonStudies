@@ -109,27 +109,35 @@ export function addToCartButton(dataElement) {
             
             const id = clickedButton.getAttribute('data-id');
             const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
+            
+            const existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || [];
+            const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id')
+            console.log('existingItemsSelected: ', existingItemsSelected)
+            console.log(existingItemsSelected == idfromAdditionalInfoItem)
+            const existingItemsSelectedId = existingItemsSelected[id]
+            console.log('existingItemsSelectedId: ', existingItemsSelectedId)
+            
+
+            let additionalInfoItem = {
+                id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
+                brand: cardElement.querySelector('.product__brand').textContent,
+                title: cardElement.querySelector('.product__title__anchor').textContent,
+                imageSrc: cardElement.querySelector('.product__image').getAttribute('src'),
+                price: cardElement.querySelector('.product__price').textContent,
+                description: cardElement.querySelector('.product__description').textContent
+
+            }            
 
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
-                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
+                localStorage.setItem('SelectedIds', JSON.stringify(existingIds)); 
                 
-                let additionalInfoItem = {
-                    id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
-                    brand: cardElement.querySelector('.product__brand').textContent,
-                    title: cardElement.querySelector('.product__title__anchor').textContent,
-                    imageSrc: cardElement.querySelector('.product__image').getAttribute('src'),
-                    price: cardElement.querySelector('.product__price').textContent,
-                    description: cardElement.querySelector('.product__description').textContent
-
-                }
-
                 additionalInfo.push(additionalInfoItem)
+                console.log('idfromAdditionalInfoItem:' , idfromAdditionalInfoItem)
                 localStorage.setItem('itemsSelected', JSON.stringify(additionalInfo))
-                
-                addItensToCart(existingIds, dataListCart, additionalInfo)
 
-            }
+                addItensToCart(existingIds, dataListCart, additionalInfo)
+            }            
         }
     })
 }
