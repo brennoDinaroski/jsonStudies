@@ -107,16 +107,10 @@ export function addToCartButton(dataElement) {
         if (clickedButton) {
             event.preventDefault();
             
-            const id = clickedButton.getAttribute('data-id');
-            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || [];
-            
-            const existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || [];
+            const id = clickedButton.getAttribute('data-id')
+            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || []
+
             const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id')
-            console.log('existingItemsSelected: ', existingItemsSelected)
-            console.log(existingItemsSelected == idfromAdditionalInfoItem)
-            const existingItemsSelectedId = existingItemsSelected[id]
-            console.log('existingItemsSelectedId: ', existingItemsSelectedId)
-            
 
             let additionalInfoItem = {
                 id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
@@ -131,17 +125,20 @@ export function addToCartButton(dataElement) {
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
                 localStorage.setItem('SelectedIds', JSON.stringify(existingIds)); 
-                
-                additionalInfo.push(additionalInfoItem)
-                console.log('idfromAdditionalInfoItem:' , idfromAdditionalInfoItem)
-                localStorage.setItem('itemsSelected', JSON.stringify(additionalInfo))
 
-                addItensToCart(existingIds, dataListCart, additionalInfo)
+                const idNumber = parseInt(id)
+
+                existingItemsSelected.push(additionalInfoItem)
+                console.log('existingItemsSelected 0: ', existingItemsSelected)
+                localStorage.setItem('itemsSelected', JSON.stringify(existingItemsSelected))
+
+                addItensToCart(existingIds, dataListCart, existingItemsSelected)
             }            
         }
     })
 }
 
+let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || []
 let additionalInfo = []
 const productContainer = document.body
 
@@ -149,6 +146,6 @@ const productContainer = document.body
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
 if (eIds != undefined) {
-    addItensToCart(eIds, dataListCart)
+    addItensToCart(eIds, dataListCart, existingItemsSelected)
 } 
 

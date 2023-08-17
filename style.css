@@ -228,6 +228,29 @@
     cursor: pointer;
 }
 
+.cardCart {
+    display: FLEX;
+    flex-direction: column;
+    gap: 0.1em;
+    background-color: #fff;
+    padding: 1em; 
+    max-width: fit-content;   
+    max-height: 30em;
+    border: none;
+    border-radius: 10%;
+    margin: 2em auto;
+    
+}
+
+.productItemCart {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+
+
+
 .active {
     display: block;
 }
