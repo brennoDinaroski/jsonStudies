@@ -10,7 +10,7 @@ if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
         const searchInformation = valueSearched.target.value.toLowerCase()        
 
-        searchButton.addEventListener("click", () =>
+        /* searchButton.addEventListener("click", () => */
 
             apiProductsArray.forEach((product) => {
                 let isVisible =
@@ -19,7 +19,7 @@ if (searchInput != null) {
                     product.element.classList.toggle("hide", !isVisible)
                 
             })
-        )
+        /* ) */
 
     })
 } else { }
@@ -104,7 +104,7 @@ export function addToCartButton(dataElement) {
 
         const clickedButton = event.target.closest('.button__addToCart');
 
-        
+
         if (clickedButton) {
             event.preventDefault();
 

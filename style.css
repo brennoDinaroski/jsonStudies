@@ -227,24 +227,68 @@
 }
 
 .cardCart {
-    display: FLEX;
+    display: flex;
     flex-direction: column;
     gap: 0.1em;
     background-color: #fff;
     padding: 1em; 
     max-width: fit-content;   
-    max-height: 30em;
+    max-height: fit-content;
     border: none;
-    border-radius: 10%;
+    border-radius: 5%;
     margin: 2em auto;
     
 }
 
+.cardCart__title {
+    display: flex;
+    margin: auto;
+    font-size: 1.5em;
+}
+
+.listCard {
+    padding: 1em;
+    display: flex;  
+    flex-direction: column;     
+    
+    gap: 1em;
+}
+
 .productItemCart {
     display: flex;
-    gap: 1em;
-    justify-content: space-between;
 }
+
+.productItemCart__image{
+    max-width: 3em;
+}
+
+.productItemCart__brandAndTitle{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em 0 2em;
+}
+
+.productItemCart__brand{
+    color: rgb(41, 141, 255);
+    font-weight: 700;
+}
+
+.productItemCart__price {
+    margin-left: auto;
+}
+
+.cardCart__total,
+.cardCart__closeShopping {
+    font-size: 1.05em;
+    margin: 0.75em 0;
+    font-weight: 700;
+}
+
+.cardCart__closeShopping {
+    color: rgb(94, 94, 94);
+}
+
+
 
 
 
