@@ -8,9 +8,7 @@ let apiProductsArray = []
 
 if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
-        const searchInformation = valueSearched.target.value.toLowerCase()
-
-        console.log('apiProductsArray: ', apiProductsArray)
+        const searchInformation = valueSearched.target.value.toLowerCase()        
 
         searchButton.addEventListener("click", () =>
 
@@ -18,9 +16,6 @@ if (searchInput != null) {
                 let isVisible =
                     product.title.toLowerCase().includes(searchInformation)
                     || product.brand.toLowerCase().includes(searchInformation)
-
-                console.log('isVisible: ', isVisible)
-                
                     product.element.classList.toggle("hide", !isVisible)
                 
             })
@@ -29,31 +24,11 @@ if (searchInput != null) {
     })
 } else { }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const contentDiv = document.querySelector('.content');
 
     apiConsuming(contentDiv, createProductListItem)
 })
-
-/* export async function apiConsuming(contentDiv, functionCreateProduct) {
-    await fetch('https://dummyjson.com/products', {})
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Newtwork response was not ok')
-            }
-            return response.json()
-        })
-        .then((jsonData) => {
-            apiProductsArray = jsonData.products.map((item) => {
-                functionCreateProduct(item, contentDiv)
-                /* transferProducts(item) */
-/*}
-);
-})
-.catch(error => console.log('ERROR Fetching data', error));
-return apiProductsArray;
-} */
 
 export async function apiConsuming(contentDiv, functionCreateProduct) {
     try {
@@ -129,7 +104,7 @@ export function addToCartButton(dataElement) {
 
         const clickedButton = event.target.closest('.button__addToCart');
 
-
+        
         if (clickedButton) {
             event.preventDefault();
 
@@ -167,7 +142,6 @@ export function addToCartButton(dataElement) {
 let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || []
 let additionalInfo = []
 const productContainer = document.body
-
 
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
