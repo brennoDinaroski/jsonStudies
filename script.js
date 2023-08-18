@@ -139,7 +139,7 @@ export function addToCartButton(dataElement) {
     })
 }
 
-let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || []
+export let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || []
 let additionalInfo = []
 const productContainer = document.body
 
@@ -148,4 +148,3 @@ const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 if (eIds != undefined) {
     addItensToCart(eIds, dataListCart, existingItemsSelected)
 }
-

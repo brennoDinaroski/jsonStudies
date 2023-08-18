@@ -1,8 +1,20 @@
+/* import { existingItemsSelected } from './script.js' */
+
 export const dataListCart = document.querySelector('[data-list-cart]')
 let cartImage = document.querySelector('.cart__image')
 let closeShoppingCart = document.querySelector('.cardCart__closeShopping')
 let body = document.querySelector('.cardCart')
 let cartQuantity = document.querySelector('[data-cart-quantity]')
+
+let existingItemsSelected02 = JSON.parse(localStorage.getItem('itemsSelected')) || []
+let lengthArray =  existingItemsSelected02.length
+console.log('existingItemsSelected: ', lengthArray)
+
+cartQuantity.innerHTML = `
+    ${lengthArray}
+`
+
+
 
 cartImage.addEventListener('click', () => {    
     body.classList.add('active')
@@ -23,17 +35,14 @@ export function transferProducts(item){
 export function addItensToCart(existingIds, dataListCart, existingItemsSelected) {    
     dataListCart.innerHTML = ''    
 
-    const idsNumber = existingIds.map(str => parseInt(str, 10))
-
-    console.log('existingItemsSelected: ', existingItemsSelected)
+    const idsNumber = existingIds.map(str => parseInt(str, 10))    
 
     existingItemsSelected.forEach((item) => {
 
         let id = item.id
         let brand = item.brand
         let title = item.title
-        let price = item.price
-        console.log('price typeof: ', typeof(price))
+        let price = item.price        
         let image = item.imageSrc
         const divElement = document.createElement('tr')
         divElement.classList.add("productItemCart")
