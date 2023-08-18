@@ -13,12 +13,16 @@ if (searchInput != null) {
         console.log('apiProductsArray: ', apiProductsArray)
 
         searchButton.addEventListener("click", () =>
-            apiProductsArray.forEach(product => {
+
+            apiProductsArray.forEach((product) => {
                 let isVisible =
                     product.title.toLowerCase().includes(searchInformation)
                     || product.brand.toLowerCase().includes(searchInformation)
 
-                product.element.classList.toggle("hide", !isVisible)
+                console.log('isVisible: ', isVisible)
+                
+                    product.element.classList.toggle("hide", !isVisible)
+                
             })
         )
 
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     apiConsuming(contentDiv, createProductListItem)
 })
 
-export async function apiConsuming(contentDiv, functionCreateProduct) {
+/* export async function apiConsuming(contentDiv, functionCreateProduct) {
     await fetch('https://dummyjson.com/products', {})
         .then((response) => {
             if (!response.ok) {
@@ -44,11 +48,33 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
             apiProductsArray = jsonData.products.map((item) => {
                 functionCreateProduct(item, contentDiv)
                 /* transferProducts(item) */
-            }
-            );
-        })
-        .catch(error => console.log('ERROR Fetching data', error));
-    return apiProductsArray;
+/*}
+);
+})
+.catch(error => console.log('ERROR Fetching data', error));
+return apiProductsArray;
+} */
+
+export async function apiConsuming(contentDiv, functionCreateProduct) {
+    try {
+        const response = await fetch('https://dummyjson.com/products', {});
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const jsonData = await response.json();
+
+        apiProductsArray = jsonData.products.map((item) => {
+            return (functionCreateProduct(item, contentDiv))            
+        });
+
+        // Now apiProductsArray is fully populated
+        return apiProductsArray;
+    } catch (error) {
+        console.log('ERROR Fetching data', error);
+        return [];
+    }
 }
 
 function createProductListItem(item, contentDiv) {
