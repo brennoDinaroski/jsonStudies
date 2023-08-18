@@ -242,8 +242,10 @@
 
 .cardCart__title {
     display: flex;
-    margin: auto;
-    font-size: 1.5em;
+    justify-content: center;
+    margin: 0.25em;
+    align-items: center;
+    font-size: 1.625em;
 }
 
 .listCard {
@@ -277,6 +279,20 @@
     margin-left: auto;
 }
 
+.cardCart__valueAndClose {
+    padding: 1em;
+}
+
+.cardCart__totalAndPrice {
+    display: flex;
+    align-items: center;
+}
+
+.cardCart__price {
+    margin-left: auto;
+}
+
+
 .cardCart__total,
 .cardCart__closeShopping {
     font-size: 1.05em;
@@ -285,8 +301,16 @@
 }
 
 .cardCart__closeShopping {
+    display: flex;
     color: rgb(94, 94, 94);
+    justify-content: center;
+    cursor: pointer;
 }
+
+.cardCart__closeShopping:hover {
+    color: rgb(41, 141, 255);
+}
+
 
 
 
