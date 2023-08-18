@@ -10,8 +10,9 @@ if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
         const searchInformation = valueSearched.target.value.toLowerCase()
 
-        searchButton.addEventListener("click", () =>
+        console.log('apiProductsArray: ', apiProductsArray)
 
+        searchButton.addEventListener("click", () =>
             apiProductsArray.forEach(product => {
                 let isVisible =
                     product.title.toLowerCase().includes(searchInformation)
@@ -23,7 +24,6 @@ if (searchInput != null) {
 
     })
 } else { }
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +43,7 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
         .then((jsonData) => {
             apiProductsArray = jsonData.products.map((item) => {
                 functionCreateProduct(item, contentDiv)
-                transferProducts(item)
+                /* transferProducts(item) */
             }
             );
         })
@@ -100,13 +100,13 @@ export function addToCartButton(dataElement) {
 
     productContainer.addEventListener('click', (event) => {
         const cardElement = event.target.closest('.card')
-        
-        const clickedButton = event.target.closest('.button__addToCart');  
 
-        
+        const clickedButton = event.target.closest('.button__addToCart');
+
+
         if (clickedButton) {
             event.preventDefault();
-            
+
             const id = clickedButton.getAttribute('data-id')
             const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || []
 
@@ -120,11 +120,11 @@ export function addToCartButton(dataElement) {
                 price: cardElement.querySelector('.product__price').textContent,
                 description: cardElement.querySelector('.product__description').textContent
 
-            }            
+            }
 
             if (!existingIds.includes(id)) {
                 existingIds.push(id);
-                localStorage.setItem('SelectedIds', JSON.stringify(existingIds)); 
+                localStorage.setItem('SelectedIds', JSON.stringify(existingIds));
 
                 const idNumber = parseInt(id)
 
@@ -133,7 +133,7 @@ export function addToCartButton(dataElement) {
                 localStorage.setItem('itemsSelected', JSON.stringify(existingItemsSelected))
 
                 addItensToCart(existingIds, dataListCart, existingItemsSelected)
-            }            
+            }
         }
     })
 }
@@ -147,5 +147,5 @@ const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
 if (eIds != undefined) {
     addItensToCart(eIds, dataListCart, existingItemsSelected)
-} 
+}
 

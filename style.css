@@ -136,9 +136,7 @@
     margin-top: auto;
 }
 
-.hide {
-    display: none;
-}
+
 
 .ProductDescription {
     margin: auto;
@@ -256,5 +254,9 @@
 }
 
 .deactive {
+    display: none;
+}
+
+.hide {
     display: none;
 }
