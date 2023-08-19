@@ -12,7 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendProductPage(item, productSpace) {        
         if(item.id == productId) {
             const productContent = document.createElement('div')
-            productContent.classList.add('product-content')
+            const buttonAddToCart = document.createElement('button')
+            
+            productContent.classList.add('product-content', 'cardSelected')
+            
+            buttonAddToCart.innerHTML = 'Add to Cart'
+            buttonAddToCart.setAttribute('class', 'button__addToCart')
+            buttonAddToCart.setAttribute('id', 'buttonContainer')
+            buttonAddToCart.setAttribute('data-id', `${item.id}`)
+
+
             productContent.innerHTML = `  
             <div class='ProductDescription'>              
                 
@@ -26,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a class="productPage__title__anchor" href="./productDetails.html?id=${item.id}"> ${item.title} </a> 
                     </header>
                     <div class='productPage__brand' > ${item.brand} </div>                    
-                    <div class='productPage__price' > R$ ${item.price} </div>   
-                    <button class='productPage__buyButton'  > BUY </button>                 
+                    <div class='productPage__price' > R$ ${item.price} </div>                       
                 </div>                
             </div>
             <div>
@@ -35,6 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
                 `
             productSpace.appendChild(productContent)
+
+            productContent.appendChild(buttonAddToCart)
+
+            addToCartButton(productContent)
+
         } else {return }
     }
 })

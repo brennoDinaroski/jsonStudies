@@ -10,6 +10,7 @@ if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
         const searchInformation = valueSearched.target.value.toLowerCase()        
 
+        // to activate the 'search' button
         /* searchButton.addEventListener("click", () => */
 
             apiProductsArray.forEach((product) => {
@@ -41,7 +42,7 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
         const jsonData = await response.json();
 
         apiProductsArray = jsonData.products.map((item) => {
-            return (functionCreateProduct(item, contentDiv))            
+            return (functionCreateProduct(item, contentDiv), apiProductsArray)            
         });
 
         // Now apiProductsArray is fully populated
@@ -66,7 +67,7 @@ function createProductListItem(item, contentDiv) {
     link.textContent = item.title
 
     dataElement.appendChild(link)
-    dataElement.classList.add("card")
+    dataElement.classList.add("card", "cardSelected")
     dataElement.innerHTML = ` 
             <div class='product__id' data-product-id="${item.id}"> ID: ${item.id} </div>
             <header data-product-title class='product__title'> 
@@ -100,9 +101,11 @@ function createProductListItem(item, contentDiv) {
 export function addToCartButton(dataElement) {
 
     productContainer.addEventListener('click', (event) => {
-        const cardElement = event.target.closest('.card')
-
+        const cardElement = event.target.closest('.cardSelected')
+        console.log('cardElement: ', cardElement)
+        
         const clickedButton = event.target.closest('.button__addToCart');
+        console.log('clickedButton: ', clickedButton)
 
 
         if (clickedButton) {
@@ -111,7 +114,7 @@ export function addToCartButton(dataElement) {
             const id = clickedButton.getAttribute('data-id')
             const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || []
 
-            const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id')
+            /* const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id') */
 
             let additionalInfoItem = {
                 id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
@@ -143,8 +146,11 @@ export let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelecte
 let additionalInfo = []
 const productContainer = document.body
 
+
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
 if (eIds != undefined) {
     addItensToCart(eIds, dataListCart, existingItemsSelected)
 }
+
+console.log('apiProductsArray: ', apiProductsArray)
