@@ -11,13 +11,16 @@ let existingItemsSelected02 = JSON.parse(localStorage.getItem('itemsSelected')) 
 let lengthArray = existingItemsSelected02.length
 console.log('existingItemsSelected: ', lengthArray)
 
-export function updateCartItems(){    
-    lengthArray = lengthArray++
-    console.log(lengthArray)
+export function updateCartItems(){        
+    lengthArray = lengthArray + 1   
+
+    cartQuantity.innerHTML = `
+    ${lengthArray}
+    `    
     return (lengthArray)
 }
 
-if (existingItemsSelected02 || updateCartItems()){
+if ( existingItemsSelected02 ) {    
     cartQuantity.innerHTML = `
     ${lengthArray}
     `
