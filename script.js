@@ -2,9 +2,9 @@ import { addItensToCart, dataListCart, transferProducts, updateCartItems } from 
 
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
+let jsonData
 
 let apiProductsArray = []
-
 
 if (searchInput != null) {
     searchInput.addEventListener("input", (valueSearched) => {
@@ -39,19 +39,25 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
             throw new Error('Network response was not ok');
         }
 
-        const jsonData = await response.json();
-
+        jsonData = await response.json();
+        console.log('jsonData: ', jsonData)     
+        
         apiProductsArray = jsonData.products.map((item) => {
             return (functionCreateProduct(item, contentDiv), apiProductsArray)            
-        });
+        });     
 
         // Now apiProductsArray is fully populated
-        return apiProductsArray;
+        return apiProductsArray, jsonData;
+
     } catch (error) {
         console.log('ERROR Fetching data', error);
         return [];
     }
 }
+
+
+
+
 
 function createProductListItem(item, contentDiv) {
     const dataElement = document.createElement('div')
@@ -101,13 +107,15 @@ function createProductListItem(item, contentDiv) {
 export function addToCartButton(dataElement) {
 
     productContainer.addEventListener('click', (event) => {
-        const cardElement = event.target.closest('.cardSelected')
-        console.log('cardElement: ', cardElement)
+        const cardElement = event.target.closest('.cardSelected') 
         
+        const cardElementId = cardElement.querySelector('[data-id]').getAttribute('data-id')
+
         const clickedButton = event.target.closest('.button__addToCart');
-        console.log('clickedButton: ', clickedButton)
 
-
+        console.log('apiProductsArray: ', apiProductsArray)
+        console.log('apiProducts: ', apiProducts)        
+        
         if (clickedButton) {
             event.preventDefault();
 
@@ -117,7 +125,7 @@ export function addToCartButton(dataElement) {
             /* const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id') */
 
             let additionalInfoItem = {
-                id: cardElement.querySelector('.product__id').getAttribute('data-product-id'),
+                id: cardElement.querySelector('[data-id]').getAttribute('[data-id]'),
                 brand: cardElement.querySelector('.product__brand').textContent,
                 title: cardElement.querySelector('.product__title__anchor').textContent,
                 imageSrc: cardElement.querySelector('.product__image').getAttribute('src'),
@@ -153,4 +161,3 @@ if (eIds != undefined) {
     addItensToCart(eIds, dataListCart, existingItemsSelected)
 }
 
-console.log('apiProductsArray: ', apiProductsArray)
