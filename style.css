@@ -24,15 +24,30 @@
 }
 
 .cart {
+    display: flex;
+    align-items: center;
     max-width: 2em;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
 
+.quantityCart {
+    translate: -0.4em -1.2em ;
+    /* display: inline-block ; */
+    padding: 0.5em;
+    width: 3em;
+    height: 1em;
+    background-color: rgb(41, 141, 255);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1em;
+    color: white;    
+}
+
 .cart__image{
     max-width: 3em;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .search-container {

@@ -1,4 +1,4 @@
-import { addItensToCart, dataListCart, transferProducts } from './cartScript.js'
+import { addItensToCart, dataListCart, transferProducts, updateCartItems } from './cartScript.js'
 
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
@@ -129,8 +129,8 @@ export function addToCartButton(dataElement) {
 
                 const idNumber = parseInt(id)
 
-                existingItemsSelected.push(additionalInfoItem)
-                console.log('existingItemsSelected 0: ', existingItemsSelected)
+                existingItemsSelected.push(additionalInfoItem) 
+                updateCartItems()               
                 localStorage.setItem('itemsSelected', JSON.stringify(existingItemsSelected))
 
                 addItensToCart(existingIds, dataListCart, existingItemsSelected)
