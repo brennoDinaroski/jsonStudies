@@ -1,4 +1,5 @@
 import { apiConsuming, addToCartButton } from "./script.js"
+import { getJsonData } from "./jsonDataModule.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     const productSpace = document.querySelector("[data-product-content]")   
@@ -13,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if(item.id == productId) {
             const productContent = document.createElement('div')
             const buttonAddToCart = document.createElement('button')
+
+            getJsonData().then((jsonData) => {
+                console.log('appendProductPage jsonData: ', jsonData.products[item.id - 1])
+            })
             
             productContent.classList.add('product-content', 'cardSelected')
             
@@ -50,4 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {return }
     }
+})
+
+getJsonData().then((jsonData) => {
+    console.log('jsonData productBuilder: ', jsonData.products[0].brand)
 })

@@ -7,9 +7,7 @@ let cartQuantity = document.querySelector('[data-cart-quantity]')
 
 let existingItemsSelected02 = JSON.parse(localStorage.getItem('itemsSelected')) || []
 
-
 let lengthArray = existingItemsSelected02.length
-console.log('existingItemsSelected: ', lengthArray)
 
 export function updateCartItems(){        
     lengthArray = lengthArray + 1   

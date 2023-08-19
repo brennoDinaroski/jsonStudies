@@ -1,8 +1,8 @@
 import { addItensToCart, dataListCart, transferProducts, updateCartItems } from './cartScript.js'
+import { setJsonData, getJsonData } from './jsonDataModule.js'
 
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
-let jsonData
 
 let apiProductsArray = []
 
@@ -39,11 +39,14 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
             throw new Error('Network response was not ok');
         }
 
-        jsonData = await response.json();
-        console.log('jsonData: ', jsonData)     
+        const jsonData = await response.json();
+        console.log('jsonData: ', jsonData)    
+
+        setJsonData(jsonData)      
+        
         
         apiProductsArray = jsonData.products.map((item) => {
-            return (functionCreateProduct(item, contentDiv), apiProductsArray)            
+            return (functionCreateProduct(item, contentDiv))            
         });     
 
         // Now apiProductsArray is fully populated
@@ -54,10 +57,6 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
         return [];
     }
 }
-
-
-
-
 
 function createProductListItem(item, contentDiv) {
     const dataElement = document.createElement('div')
@@ -111,10 +110,7 @@ export function addToCartButton(dataElement) {
         
         const cardElementId = cardElement.querySelector('[data-id]').getAttribute('data-id')
 
-        const clickedButton = event.target.closest('.button__addToCart');
-
-        console.log('apiProductsArray: ', apiProductsArray)
-        console.log('apiProducts: ', apiProducts)        
+        const clickedButton = event.target.closest('.button__addToCart');       
         
         if (clickedButton) {
             event.preventDefault();
