@@ -1,4 +1,4 @@
-import { apiConsuming, addToCartButton } from "./script.js"
+import { apiConsuming, addToCartButton, jsonDataFromLocalStorage } from "./script.js"
 import { getJsonData } from "./jsonDataModule.js"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,20 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search)
     const productId = urlParams.get('id')
-    console.log('productId: ', productId)
+    const productsFromLocalStorage = jsonDataFromLocalStorage.products
+    const selectedProductToBuild = productsFromLocalStorage[productId - 1]
 
-    apiConsuming(productSpace, appendProductPage)
+    appendProductPage(selectedProductToBuild, productSpace)
 
     function appendProductPage(item, productSpace) {
         if (item.id == productId) {
+            console.log('item: ', item)
             const productContent = document.createElement('div')
             const buttonAddToCart = document.createElement('button')
 
             getJsonData().then((jsonData) => {
                 const productSelected = jsonData.products[item.id - 1]
                 const productTitle = productSelected.title
-                console.log('appendProductPage jsonData: ', productSelected)
-
 
                 productContent.classList.add('product-content', 'cardSelected')
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 productContent.appendChild(buttonAddToCart)
 
-                addToCartButton(productContent)
+                addToCartButton(item)
             })
 
         } else { return }
