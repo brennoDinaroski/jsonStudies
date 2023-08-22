@@ -109,6 +109,7 @@ export function addToCartButton(dataElement) {
         const cardElement = event.target.closest('.cardSelected') 
         
         const cardElementId = cardElement.querySelector('[data-id]').getAttribute('data-id')
+        console.log('cardElementId selected: ', cardElementId, productSelected)
 
         const clickedButton = event.target.closest('.button__addToCart');       
         
@@ -116,9 +117,7 @@ export function addToCartButton(dataElement) {
             event.preventDefault();
 
             const id = clickedButton.getAttribute('data-id')
-            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || []
-
-            /* const idfromAdditionalInfoItem = cardElement.querySelector('.product__id').getAttribute('data-product-id') */
+            const existingIds = JSON.parse(localStorage.getItem('SelectedIds')) || []            
 
             let additionalInfoItem = {
                 id: cardElement.querySelector('[data-id]').getAttribute('[data-id]'),
