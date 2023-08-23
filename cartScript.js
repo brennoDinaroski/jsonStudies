@@ -1,4 +1,5 @@
 export const dataListCart = document.querySelector('[data-list-cart]')
+import { updateCartTotalPrice } from './cartValue.js'
 
 let cartImage = document.querySelector('.cart__image')
 let closeShoppingCart = document.querySelector('.cardCart__closeShopping')
@@ -24,9 +25,6 @@ if ( existingItemsSelected02 ) {
     `
 }
 
-
-
-
 cartImage.addEventListener('click', () => {
     body.classList.add('active')
     body.classList.remove('deactive');
@@ -47,6 +45,7 @@ export function addItensToCart(existingIds, dataListCart, existingItemsSelected)
     dataListCart.innerHTML = ''
 
     const idsNumber = existingIds.map(str => parseInt(str, 10))
+    updateCartTotalPrice(existingItemsSelected)
 
     existingItemsSelected.forEach((item) => {
 
@@ -67,8 +66,9 @@ export function addItensToCart(existingIds, dataListCart, existingItemsSelected)
                 <td class= 'productItemCart__price'> ${price} </td> 
             <tr>        
         `
-        dataListCart.appendChild(divElement)
+        dataListCart.appendChild(divElement)        
     })
     return {
+        
     }
 }

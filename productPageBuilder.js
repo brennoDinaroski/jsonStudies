@@ -1,4 +1,4 @@
-import { apiConsuming, addToCartButton, /* jsonDataFromLocalStorage */ } from "./script.js"
+import { apiConsuming, addToCartButton } from "./script.js"
 import { getJsonData, setJsonData, jsonData } from "./jsonDataModule.js"
 
 document.addEventListener('DOMContentLoaded', () => {
