@@ -1,14 +1,17 @@
-import { apiConsuming, addToCartButton, jsonDataFromLocalStorage } from "./script.js"
-import { getJsonData } from "./jsonDataModule.js"
+import { apiConsuming, addToCartButton, /* jsonDataFromLocalStorage */ } from "./script.js"
+import { getJsonData, setJsonData, jsonData } from "./jsonDataModule.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     const productSpace = document.querySelector("[data-product-content]")
 
     const urlParams = new URLSearchParams(window.location.search)
     const productId = urlParams.get('id')
-    const productsFromLocalStorage = jsonDataFromLocalStorage.products
+    const productsFromLocalStorage = (JSON.parse(localStorage.getItem('jsonData')) || []).products
     const selectedProductToBuild = productsFromLocalStorage[productId - 1]
-
+    
+    console.log('productsFromLocalStorage: ', productsFromLocalStorage)
+    console.log('selectedProductToBuild: ', selectedProductToBuild)
+    
     appendProductPage(selectedProductToBuild, productSpace)
 
     function appendProductPage(item, productSpace) {

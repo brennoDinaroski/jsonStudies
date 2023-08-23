@@ -118,7 +118,15 @@ async function createProductListItem(item, contentDiv) {
 }
 
 productContainer.addEventListener('click', (event) => {
-    selectedCard(event)
+    const clickedButton = event.target.closest('.button__addToCart');
+    const clickedTitle = event.target.closest('.product__title__anchor')
+    
+    if (clickedButton){
+        selectedCard(event)
+    }
+    if (clickedTitle){
+        
+    }
 })
 
 function selectedCard (event) {

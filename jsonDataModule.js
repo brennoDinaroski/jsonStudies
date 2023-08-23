@@ -1,4 +1,4 @@
-let jsonData = null
+export let jsonData = null
 let jsonDataPromise = null
 
 export function setJsonData(data) {
@@ -28,5 +28,4 @@ export function getJsonData() {
         }
         return jsonDataPromise.promise 
     }
-
 }
