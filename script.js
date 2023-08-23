@@ -4,14 +4,12 @@ import { setJsonData, getJsonData } from './jsonDataModule.js'
 const searchInput = document.querySelector("[data-input]")
 const searchButton = document.querySelector("[data-search-button]")
 export let existingItemsSelected = JSON.parse(localStorage.getItem('itemsSelected')) || []
-export const jsonDataFromLocalStorage = JSON.parse(localStorage.getItem('jsonData')) || []
+/* export const jsonDataFromLocalStorage = JSON.parse(localStorage.getItem('jsonData')) || []
 const productsFromLocalStorage = jsonDataFromLocalStorage.products
-console.log('productsFromLocalStorage: ', productsFromLocalStorage)
-
+console.log('productsFromLocalStorage: ', productsFromLocalStorage) */
 
 let additionalInfo = []
 const productContainer = document.body
-
 
 const eIds = (JSON.parse(localStorage.getItem('SelectedIds')) || [])
 
@@ -28,16 +26,13 @@ if (searchInput != null) {
 
         // to activate the 'search' button
         /* searchButton.addEventListener("click", () => */
-
         apiProductsArray.forEach((product) => {
             let isVisible =
                 product.title.toLowerCase().includes(searchInformation)
                 || product.brand.toLowerCase().includes(searchInformation)
             product.element.classList.toggle("hide", !isVisible)
-
         })
         /* ) */
-
     })
 } else { }
 
@@ -56,12 +51,10 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
         }
 
         const jsonData = await response.json();
-        /* console.log('jsonData: ', jsonData)     */
+        
         localStorage.setItem('jsonData', JSON.stringify(jsonData));
 
         setJsonData(jsonData)
-
-
 
         apiProductsArray = jsonData.products.map((item) => {
             return (functionCreateProduct(item, contentDiv))
@@ -76,7 +69,7 @@ export async function apiConsuming(contentDiv, functionCreateProduct) {
     }
 }
 
-function createProductListItem(item, contentDiv) {
+async function createProductListItem(item, contentDiv) {
     const dataElement = document.createElement('div')
     const link = document.createElement('a')
     const buttonAddToCart = document.createElement('button')
@@ -111,10 +104,7 @@ function createProductListItem(item, contentDiv) {
 
     /* addToCartButton(dataElement) */
     
-    selectedCard(productsFromLocalStorage) 
-
-    
-
+    /* selectedCard() */
 
     return {
         id: item.id,
@@ -127,34 +117,44 @@ function createProductListItem(item, contentDiv) {
     }
 }
 
-function selectedCard (productsFromLocalStorage) {
-    productContainer.addEventListener('click', (event) => {
-        console.log('productsFromLocalStorage: ', productsFromLocalStorage)
+productContainer.addEventListener('click', (event) => {
+    selectedCard(event)
+})
+
+function selectedCard (event) {
+    let fromLocalStorage = getJsonData()
+    console.log('fromLocalStorage: ', fromLocalStorage)
+    let productsFromLocalStorage = fromLocalStorage.products
+    console.log('productsFromLocalStorage: ', productsFromLocalStorage)
+
+    /* productContainer.addEventListener('click', (event) => { */
         
         const cardElement = event.target.closest('.cardSelected')
-        const cardElementId = parseInt(cardElement.querySelector('[data-id]').getAttribute('data-id')) - 1
+        const cardElementId = parseInt(cardElement.querySelector('[data-id]').getAttribute('data-id'))
+        const cardArrayPosition = cardElementId - 1
         
         console.log('cardElementId: ', cardElementId)
-        console.log('productsFromLocalStorage: ', productsFromLocalStorage[cardElementId])
+        console.log('productsFromLocalStorage: ', productsFromLocalStorage[cardArrayPosition])
         
-        const selectedProductToBuild = productsFromLocalStorage[cardElementId]
+        const selectedProductToBuild = productsFromLocalStorage[cardArrayPosition]
         console.log('selectedProductToBuild: ', selectedProductToBuild)
 
-        addToCartButtonFromMainPage(selectedProductToBuild, cardElementId)
-    })
+        addToCartButtonFromMainPage(selectedProductToBuild, cardElementId, event )
+    /* }) */
 }
 
-function addToCartButtonFromMainPage(item, cardElementId) {
+function addToCartButtonFromMainPage(item, cardElementId, event) {
     console.log('addToCartButtonFromMainPage being executed')
-    console.log('BEFORE "if" being executed: ',item.id-1, ' ', cardElementId )
+    console.log('BEFORE "if" being executed: ',(item.id), ' ', (cardElementId + 1 ) )
 
-    productContainer.addEventListener('click', (event) => {       
+    /* productContainer.addEventListener('click', (event) => {   */
 
-        if ((item.id - 1) == cardElementId) {
+       /*  if ((item.id) === (cardElementId + 1)) { */
+            console.log('if being executed: ', (item.id), ' ', cardElementId)
 
             const clickedButton = event.target.closest('.button__addToCart');
 
-            if (clickedButton) {
+            /* if (clickedButton) { */
                 event.preventDefault();
 
                 const id = clickedButton.getAttribute('data-id')
@@ -181,9 +181,9 @@ function addToCartButtonFromMainPage(item, cardElementId) {
 
                     addItensToCart(existingIds, dataListCart, existingItemsSelected)
                 }
-            }
-        }
-    })
+            /* } */
+        /* } */
+    /* }) */
 }
 
 
