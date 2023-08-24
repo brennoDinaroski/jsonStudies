@@ -3,7 +3,7 @@ console.log('cartTotalPriceSpace: ', cartTotalPriceSpace)
 let cartTotalPrice = null
 
 export function updateCartTotalPrice (existingItemsSelected) {
-
+    cartTotalPrice = 0
     existingItemsSelected.forEach( (item) => {
         cartTotalPrice = cartTotalPrice + item.price
     }) 
