@@ -326,12 +326,29 @@
     color: rgb(41, 141, 255);
 }
 
+.pageLinks{
+    display: flex;
+    justify-content: center;
+    margin: 1em auto;
+    font-size: 1.2em;
+    color: #9e1414;    
+    text-decoration: none;
+    font-weight: 700;
+
+}
+
+.pageLinks :visited {
+    color: #fff;
+}
+
+.a:-webkit-any-link {
+    color:#fff;
+}
 
 
 
 
-
-
+/* THESE ELEMENT BELOW NEEDS TO BE EVER IN THE END OF THE CSS CODE */
 .active {
     display: block;
 }
