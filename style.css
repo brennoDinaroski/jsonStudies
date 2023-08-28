@@ -291,7 +291,7 @@
 }
 
 .productItemCart__price {
-    margin-left: auto;
+    margin: auto 0 auto auto;
 }
 
 .cardCart__valueAndClose {
@@ -343,6 +343,22 @@
 
 .a:-webkit-any-link {
     color:#fff;
+}
+
+.deleteButton__trashButton {
+    display: flex;    
+    margin: auto 0 auto 1em;  
+    max-width: 1.5em;
+    max-height: 1.5em;
+    align-items: center;    
+}
+
+.deleteButton__trashImage{
+    max-width: 1em;
+    max-height: 1em;
+    display: flex;       
+    align-items: center;
+    padding: 0.1em;
 }
 
 

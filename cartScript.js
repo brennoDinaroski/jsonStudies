@@ -43,9 +43,16 @@ export function transferProducts(item) {
 
 export function addItensToCart(existingIds, dataListCart, existingItemsSelected) {
     dataListCart.innerHTML = ''
-
+    
     const idsNumber = existingIds.map(str => parseInt(str, 10))
     updateCartTotalPrice(existingItemsSelected)
+
+    const deleteItemButton = document.createElement('button')
+    deleteItemButton.setAttribute('class', 'delete__item__button')
+    deleteItemButton.innerHTML = `delete` 
+
+
+    
 
     existingItemsSelected.forEach((item) => {
 
@@ -64,9 +71,11 @@ export function addItensToCart(existingIds, dataListCart, existingItemsSelected)
                     <div class= 'productItemCart__title'> ${title} </div>              
                 </td>
                 <td class= 'productItemCart__price'> ${price} </td> 
+                <button class='deleteButton__trashButton' > <img class='deleteButton__trashImage' src='resources/images/trash.png' > </button>
             <tr>        
         `
-        dataListCart.appendChild(divElement)        
+        /* divElement.appendChild(deleteItemButton) */
+        dataListCart.appendChild(divElement)
     })
     return {
         
